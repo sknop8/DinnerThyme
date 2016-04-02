@@ -1,11 +1,15 @@
-var GAME_TIME = 0;
+
 var c, ctx;
+var GAME_THYME = 11;
+var thymerInterval;
 
-var timer = function timer() {
-	GAME_TIME++; 
-	document.getElementById('thymer').innerHTML = GAME_TIME;
+var thymer = function thymer() {
+	GAME_THYME--; 
+	document.getElementById('thymer').innerHTML = GAME_THYME;
+	if (GAME_THYME === 0) {
+		game_over();
+	}
 };
-
 
 var closeStartScreen = function closeStartScreen() {
 	$("#title").css("display", "none");
@@ -31,8 +35,8 @@ var openGameScreen = function openGameScreen() {
 var play  = function play() {
 	closeStartScreen();
 	openGameScreen();
-	timer();
-	setInterval(timer, 1000);
+	thymer();
+	thymerInterval = setInterval(thymer, 1000);
 };
 
 var make_thyme = function make_thyme() {
@@ -40,5 +44,13 @@ var make_thyme = function make_thyme() {
 };
 
 var change_thyme = function change_thyme() {
+	
+};
 
+var game_over = function game_over() {
+	clearTimeout(thymerInterval);
+	GAME_THYME = 11;
+	var div = $('<div><div/>').html("Thyme Wasted: ");
+	$(div).attr('id', 'game_over');
+	$('body').append(div);
 };
