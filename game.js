@@ -1,4 +1,4 @@
-var GAME_THYME = 11;
+var GAME_THYME = 3;
 var thymerInterval;
 
 var thymer = function thymer() {
@@ -12,6 +12,14 @@ var thymer = function thymer() {
 var close_startScreen = function close_startScreen() {
 	$("#title").css("display", "none");
 	$("#play_button").css("display", "none");
+	$("#game_over").html("");
+};
+
+var reset_startScreen = function open_startScreen() {
+	$("#title").css("display", "block");
+	$("#play_button").css("display", "block");
+	$('#play_button').html('Cook Again!');
+	$('#thymer').html('');
 };
 
 var play  = function play() {
@@ -23,7 +31,6 @@ var play  = function play() {
 var game_over = function game_over() {
 	clearTimeout(thymerInterval);
 	GAME_THYME = 11;
-	var div = $('<div><div/>').html("Thyme Wasted: ");
-	$(div).attr('id', 'game_over');
-	$('body').append(div);
+	reset_startScreen();
+	$('#game_over').html("Thyme Wasted: ");
 };
