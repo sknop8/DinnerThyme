@@ -1,11 +1,11 @@
 var GAME_TIME = 0;
 
-var startTime = function startTime() {
+var timer = function timer() {
 	GAME_TIME++; 
 	document.getElementById('timer').innerHTML = GAME_TIME;
-}
+};
 
-function play() {
+var play  = function play() {
 	startTime();
-	setTimeout(startTime, 1000);
-}
+	setInterval(timer, 1000);
+};
