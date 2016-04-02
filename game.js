@@ -20,7 +20,7 @@ var closeStartScreen = function closeStartScreen() {
 var resetStartScreen = function openStartScreen() {
 	$("#title").css("display", "block");
 	$("#play_button").css("display", "block");
-	$("#canvas").css("display", "block");
+	$("#canvas").css("display", "none");
 	$('#play_button').html('Cook Again!');
 	$('#thymer').html('');
 };
@@ -56,9 +56,14 @@ var change_thyme = function change_thyme() {
 	
 };
 
+var collect_thyme = function collect_thyme() {
+
+};
+
 var game_over = function game_over() {
 	clearTimeout(thymerInterval);
 	GAME_THYME = 11;
 	resetStartScreen();
-	$('#game_over').html("Thyme Wasted: ");
+	$('#title').html("Thyme Wasted: ");
 };
+
