@@ -1,7 +1,7 @@
-var GAME_TIME = 0;
+var GAME_TIME = 11;
 
 var timer = function timer() {
-	GAME_TIME++; 
+	GAME_TIME--; 
 	document.getElementById('timer').innerHTML = GAME_TIME;
 };
 
@@ -12,6 +12,7 @@ var close_startScreen = function close_startScreen() {
 };
 
 var play  = function play() {
-	startTime();
+	close_startScreen();
+	timer();
 	setInterval(timer, 1000);
 };
