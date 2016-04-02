@@ -20,7 +20,7 @@ var closeStartScreen = function closeStartScreen() {
 var resetStartScreen = function openStartScreen() {
 	$("#title").css("display", "block");
 	$("#play_button").css("display", "block");
-	$("#canvas").css("display", "block");
+	$("#canvas").css("display", "none");
 	$('#play_button').html('Cook Again!');
 	$('#thymer').html('');
 };
@@ -49,7 +49,22 @@ var play  = function play() {
 };
 
 var make_thyme = function make_thyme() {
-	
+	var img = new Image();
+	img.onload = function(){
+		var thyme_width = img.naturalWidth * 0.5;
+		var thyme_height = img.naturalHeight * 0.5;
+
+	    for (var i=0;i<20;i++){
+	      for (var j=0;j<5;j++){
+	        ctx.drawImage(img,
+	        	j*thyme_width,
+	        	i*thyme_height,
+	        	thyme_width,
+	        	thyme_height);
+	      }
+	    }
+  };
+  img.src = 'assets/thyme.png';
 };
 
 var change_thyme = function change_thyme() {
