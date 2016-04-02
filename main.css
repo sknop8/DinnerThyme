@@ -1,0 +1,16 @@
+
+body {
+	text-align: center;
+}
+
+#play_button {
+	text-align: center;
+	padding: 1em;
+	font-family: sans-serif;
+	background-color: #eee;
+}
+
+#play_button:hover {
+	background-color: #ccc;
+	cursor: pointer;
+}
