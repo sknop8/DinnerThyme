@@ -51,17 +51,18 @@ var play  = function play() {
 var make_thyme = function make_thyme() {
 	var img = new Image();
 	img.onload = function(){
-		var thyme_width = img.naturalWidth * 0.5;
-		var thyme_height = img.naturalHeight * 0.5;
+		var thyme_width = img.naturalWidth * 0.3;
+		var thyme_height = img.naturalHeight * 0.3;
 
-	    for (var i=0;i<20;i++){
-	      for (var j=0;j<5;j++){
-	        ctx.drawImage(img,
-	        	j*thyme_width,
-	        	i*thyme_height,
-	        	thyme_width,
-	        	thyme_height);
-	      }
+	    for (var i=0;i<500;i++){
+	       var thyme_size_scale = Math.random();
+			ctx.drawImage(img, 
+				Math.floor((Math.random() * window.innerWidth * 0.8) 
+					+ window.innerWidth * 0.05),
+				Math.floor((Math.random() * window.innerHeight * 0.8) 
+					+ window.innerHeight * 0.05),
+				thyme_width * thyme_size_scale,
+				thyme_height * thyme_size_scale);
 	    }
   };
   img.src = 'assets/thyme.png';
