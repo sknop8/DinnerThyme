@@ -6,6 +6,12 @@ var startTime = function startTime() {
 }
 
 function play() {
+	close_startScreen();
 	startTime();
-	setTimeout(startTime, 1000);
+	setTimeout(startTime, 100);
+}
+
+function close_startScreen() {
+	$("#title").css("display", "none");
+	$("#play_button").css("display", "none");
 }
