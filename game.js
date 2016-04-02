@@ -1,10 +1,13 @@
-var GAME_TIME = 11;
+var GAME_THYME = 11;
+var thymerInterval;
 
-var timer = function timer() {
-	GAME_TIME--; 
-	document.getElementById('timer').innerHTML = GAME_TIME;
+var thymer = function thymer() {
+	GAME_THYME--; 
+	document.getElementById('thymer').innerHTML = GAME_THYME;
+	if (GAME_THYME === 0) {
+		game_over();
+	}
 };
-
 
 var close_startScreen = function close_startScreen() {
 	$("#title").css("display", "none");
@@ -13,6 +16,14 @@ var close_startScreen = function close_startScreen() {
 
 var play  = function play() {
 	close_startScreen();
-	timer();
-	setInterval(timer, 1000);
+	thymer();
+	thymerInterval = setInterval(thymer, 1000);
+};
+
+var game_over = function game_over() {
+	clearTimeout(thymerInterval);
+	GAME_THYME = 11;
+	var div = $('<div><div/>').html("Thyme Wasted: ");
+	$(div).attr('id', 'game_over');
+	$('body').append(div);
 };
