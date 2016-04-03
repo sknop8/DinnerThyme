@@ -10,6 +10,8 @@ var total_thyme = total_dishes * 10;
 var thymes = new Array();
 var thyme_recipes = new Array();
 
+var ding = new Audio("assets/ding.mp3");
+
 var timer = function timer() {
 	GAME_THYME--; 
 	document.getElementById('timer').innerHTML = "Time Left: " + GAME_THYME;
@@ -50,6 +52,7 @@ $(window).keyup(function (e) {
 	  	//unlock dishes
 	  	for (var i = 1; i < (total_dishes + 1); i++) {
 	  		if (i === unlocked_dishes) {
+	  			ding.play();
 	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).addClass("unlocked");

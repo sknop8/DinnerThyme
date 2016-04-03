@@ -107,6 +107,7 @@ html, body {
 	position: fixed;
 	display: none;
 	top: 20%;
+	height: 85%;
 }
 
 footer {
