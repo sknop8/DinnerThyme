@@ -8,6 +8,7 @@ var count = 0;
 var total_dishes = 12;
 var total_thyme = total_dishes * 10; 
 var thymes = new Array();
+var thyme_recipes = new Array();
 
 var timer = function timer() {
 	GAME_THYME--; 
@@ -43,14 +44,17 @@ $(window).keyup(function (e) {
 	  	}
 	  	count++;
 	  	thymes.shift();
-	  	draw_thymes();
+	  	chop_thymes();
 	  	unlocked_dishes = count/10;
+
+	  	//unlock dishes
 	  	for (var i = 1; i < (total_dishes + 1); i++) {
 	  		if (i === unlocked_dishes) {
 	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
+	  			$("#recipe_" + (i-1)).attr('href', thyme_recipes[i-1].url);
 	  		}
-	  	}
+	  	}      
 	  	$("#thymer").html("Thyme spent: " + count);
 	  } 
   }
@@ -82,6 +86,7 @@ var openGameScreen = function openGameScreen() {
 };
 
 var play  = function play() {
+	load_recipes();
 	closeStartScreen();
 	openGameScreen();
 	playing = true;
@@ -95,10 +100,10 @@ var make_thyme = function make_thyme() {
 		var thyme_height = img.naturalHeight * 0.3;
 
 	    for (var i = 0; i < total_thyme; i++){
-	       var thyme_size_scale = Math.random() + 0.3;
+	       var thyme_size_scale = Math.random() + 0.5;
 	       var new_thyme = {
-	       	"x": window.innerWidth * 0.08 + 
-			(1.0 * i)/(window.innerWidth * 1.2/(total_thyme-3)) * (thyme_width),
+	       	"x": window.innerWidth * 0.07 + 
+			(1.0 * i)/(window.innerWidth * 1.5 /(total_thyme-3)) * (thyme_width),
 			"y": window.innerHeight * 0.5 +                                   
 				window.innerHeight * Math.random()/3 - thyme_height * thyme_size_scale,
 			"width" : thyme_width * thyme_size_scale,
@@ -111,55 +116,33 @@ var make_thyme = function make_thyme() {
 				thymes[i].width,
 				thymes[i].height
 			);
-			// ctx.drawImage(img, 
-			// 	window.innerWidth * 0.08 + 
-			// 	(1.0 * i)/(window.innerWidth * 1.2/(total_thyme-3)) * (thyme_width),
-			// 	window.innerHeight * 0.5 +                                   
-			// 	window.innerHeight * Math.random()/3 - thyme_height * thyme_size_scale,
-			// 	thyme_width * thyme_size_scale,
-			// 	thyme_height * thyme_size_scale);
 	    }
-	    draw_thymes();
   };
-  img.src = 'assets/thyme.png';
+  img.src = 'assets/thymes.png';
   
 };
 
-var draw_thymes = function draw_thymes(){
+var chop_thymes = function chop_thymes(){
 	var img = new Image();
-	ctx.clearRect(0, 0, ctx.canvas.width * (total_thyme * 1.0 - thymes.length) /total_thyme, 
+	ctx.clearRect(0, 0, window.innerWidth * 0.08 + 
+		ctx.canvas.width * 0.8 * (total_thyme * 1.0 - thymes.length) /total_thyme, 
 		ctx.canvas.height);
-	// img.onload = function() {
-	// 	var thyme_width = img.naturalWidth * 0.3;
-	// 	var thyme_height = img.naturalHeight * 0.3;
-	// 	for (var i = 0; i < thymes.length; i++) {
-	// 		ctx.drawImage(img,
-	// 			thymes[i].x,
-	// 			thymes[i].y,
-	// 			thymes[i].width,
-	// 			thymes[i].height
-	// 		);
-	// 	}
-	// }
-	img.src = 'assets/thyme.png';
 }
 
 var put_dishes = function put_dishes() {
 	$("#thyme_dishes").empty();
 	for (var i = 0; i < total_dishes; i++) {
-		$("#thyme_dishes").append("<img src = 'assets/dishes_square/"
+		$("#thyme_dishes").append("<a id = 'recipe_" + i + "' target='_blank'><img src = 'assets/dishes_square/"
 			+ i + ".png' class = 'thyme_dish' id = 'dish_" + i
-			+ "'>");
+			+ "'></a>");
 	}
 }
 
-var change_thyme = function change_thyme() {
-	
-};
-
-var collect_thyme = function collect_thyme() {
-
-};
+var load_recipes = function load_recipes() {
+	$.getJSON("thyme_dishes.json", function(json) {
+   		thyme_recipes = json;
+	});
+}
 
 var game_over = function game_over() {
 	playing = false;
