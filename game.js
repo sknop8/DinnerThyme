@@ -1,10 +1,12 @@
 
 var c, ctx;
-var GAME_THYME = 6 ;
+var GAME_THYME = 11;
 var thymerInterval;
 var playing = false;
 var count = 0;
-var total_thyme = 100;
+
+var total_dishes = 12;
+var total_thyme = total_dishes * 10; 
 
 var timer = function timer() {
 	GAME_THYME--; 
@@ -40,7 +42,7 @@ $(window).keyup(function (e) {
 	  	}
 	  	count++;
 	  	unlocked_dishes = count/10;
-	  	for (var i = 1; i < 11; i++) {
+	  	for (var i = 1; i < (total_dishes + 1); i++) {
 	  		if (i === unlocked_dishes) {
 	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
@@ -103,7 +105,7 @@ var make_thyme = function make_thyme() {
 
 var put_dishes = function put_dishes() {
 	$("#thyme_dishes").empty();
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < total_dishes; i++) {
 		$("#thyme_dishes").append("<img src = 'assets/dishes_square/"
 			+ i + ".png' class = 'thyme_dish' id = 'dish_" + i
 			+ "'>");
@@ -121,7 +123,7 @@ var collect_thyme = function collect_thyme() {
 var game_over = function game_over() {
 	playing = false;
 	clearTimeout(thymerInterval);
-	GAME_THYME = 6;
+	GAME_THYME = 11;
 	resetStartScreen();
 	$('#title').html("Thyme Wasted: " + (total_thyme - count));
 	count = 0;
