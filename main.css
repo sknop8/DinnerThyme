@@ -48,18 +48,37 @@ html, body {
 	font-size: 1.8em;
 	padding: 1em;
 	color: #265229;
+	top: 0;
 	text-transform: lowercase;
 }
 
 #timer {
-	top: 0;
-	text-align: right;
+	text-align: left;
+	left: 0.5em;
 }
 
 #thymer {
-	width: 500px;
-	padding-left: 50%;
-	margin-left: -250px;
-	bottom: 0em;
+	right: 0.5em;
+	text-align: right;
+}
+
+.thyme_dish {
+	width: 80px;
+	height: auto;
+	border: solid 15px #fff;
+	border-radius: 50%;
+	margin: 0.5em;
+	-webkit-filter: blur(2.5px) grayscale(100%); /* Chrome, Safari, Opera */
+    filter: blur(2.5px) grayscale(100%);
+}
+
+#thyme_dishes {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
 	text-align: center;
+	padding-top: 0.5em;
+	background-image: url("assets/wood_seamless.jpg");
+    background-repeat: repeat;
+    display: none;
 }

@@ -59,12 +59,14 @@ var openGameScreen = function openGameScreen() {
      ctx = c[0].getContext('2d');
 
      ctx.canvas.width = WIDTH;
-     ctx.canvas.height = HEIGHT;
+     ctx.canvas.height = HEIGHT * 0.7;
 
 	$("#canvas").css("display", "block");
+	$("#thyme_dishes").css("display", "block");
 	$("#thymer").html("Thyme Spent: 0");
 
 	make_thyme();
+	put_dishes();
 };
 
 var play  = function play() {
@@ -84,14 +86,21 @@ var make_thyme = function make_thyme() {
 			ctx.drawImage(img, 
 				Math.floor((Math.random() * window.innerWidth * 0.8) 
 					 + window.innerWidth * 0.05),
-				Math.floor((Math.random() * window.innerHeight * 0.2) 
-					+ window.innerHeight * 0.3),
+				window.innerHeight * 0.6 - thyme_height * thyme_size_scale,
 				thyme_width * thyme_size_scale,
 				thyme_height * thyme_size_scale);
 	    }
   };
   img.src = 'assets/thyme.png';
 };
+
+var put_dishes = function put_dishes() {
+	$("#thyme_dishes").empty();
+	for (var i = 0; i < 10; i++) {
+		$("#thyme_dishes").append("<img src = 'assets/dishes_square/"
+			+ i + ".png' class = 'thyme_dish'>");
+	}
+}
 
 var change_thyme = function change_thyme() {
 	
