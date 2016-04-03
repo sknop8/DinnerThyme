@@ -28,7 +28,7 @@ var resetStartScreen = function openStartScreen() {
 	$("#title").css("display", "block");
 	$("#play_button").css("display", "block");
 	$("#canvas").css("display", "none");
-	$('#play_button').html('Cook Again!');
+	$('#play_button').html('Try Again!');
 	$('#timer').html('');
 	$('#thymer').html('');
 };
@@ -52,6 +52,7 @@ $(window).keyup(function (e) {
 	  		if (i === unlocked_dishes) {
 	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
+	  			$("#dish_" + (i-1)).addClass("unlocked")
 	  			$("#recipe_" + (i-1)).attr('href', thyme_recipes[i-1].url);
 	  		}
 	  	}      
@@ -79,6 +80,7 @@ var openGameScreen = function openGameScreen() {
 
 	$("#canvas").css("display", "block");
 	$("#thyme_dishes").css("display", "block");
+	$("#thank_you").css("display", "none");
 	$("#thymer").html("Thyme Spent: 0");
 
 	make_thyme();
@@ -149,7 +151,8 @@ var game_over = function game_over() {
 	clearTimeout(thymerInterval);
 	GAME_THYME = 11;
 	resetStartScreen();
-	$('#title').html("Thyme Wasted: " + (total_thyme - count));
+	var percent = 100 * count/total_thyme;
+	$('#title').html("Thyme Saved: " + percent.toFixed(2) + "%");
 	count = 0;
 };
 

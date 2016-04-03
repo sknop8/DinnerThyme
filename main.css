@@ -17,6 +17,14 @@ html, body {
 	overflow: hidden; 
 } 
 
+#thank_you {
+	position: fixed;
+	width: 400px;
+	height: auto;
+	top: 10px;
+	left: 10px;
+}
+
 #title {
 	margin-top: 15%;
 	margin-bottom: 0.5em;
@@ -79,9 +87,14 @@ html, body {
     filter: blur(2.5px) grayscale(100%);
 }
 
+.thyme_dish:hover {
+	border: solid 10px #FFF88E;
+}
+
 #thyme_dishes {
 	position: fixed;
 	width: 100%;
+	vertical-align: middle;
 	top : 0;
 	text-align: center;
 	padding-top: 0.5em;
