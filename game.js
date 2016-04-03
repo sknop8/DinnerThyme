@@ -34,6 +34,10 @@ $(window).keyup(function (e) {
     e.preventDefault()
     var keyCode = e.keyCode;
 	  if(keyCode === 32 && playing) {
+	  	if (count === 0) {
+	  		timer();
+			thymerInterval = setInterval(timer, 1000);
+	  	}
 	  	count++;
 	  	$("#thymer").html("Thyme earned: " + count);
 	  } 
@@ -66,8 +70,6 @@ var openGameScreen = function openGameScreen() {
 var play  = function play() {
 	closeStartScreen();
 	openGameScreen();
-	timer();
-	thymerInterval = setInterval(timer, 1000);
 	playing = true;
 };
 
@@ -78,11 +80,11 @@ var make_thyme = function make_thyme() {
 		var thyme_height = img.naturalHeight * 0.3;
 
 	    for (var i = 0; i < total_thyme; i++){
-	       var thyme_size_scale = Math.random();
+	       var thyme_size_scale = Math.random() + 0.3;
 			ctx.drawImage(img, 
 				Math.floor((Math.random() * window.innerWidth * 0.8) 
 					 + window.innerWidth * 0.05),
-				Math.floor((Math.random() * window.innerHeight * 0.2 ) 
+				Math.floor((Math.random() * window.innerHeight * 0.2) 
 					+ window.innerHeight * 0.3),
 				thyme_width * thyme_size_scale,
 				thyme_height * thyme_size_scale);
