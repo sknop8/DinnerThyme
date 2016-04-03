@@ -113,3 +113,19 @@ footer {
 	color: #FFF;
 	font-size: 1.4em;
 }
+
+#sally, #suzanne {
+	text-decoration: none;
+	color: #fff;
+}
+
+#sally:hover, #suzanne:hover {
+	color: #FFF88E;
+}
+
+#heart {
+	font-size: 1.2em;
+}
+#heart:hover {
+	color: #74040A;
+}

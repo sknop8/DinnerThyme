@@ -52,7 +52,7 @@ $(window).keyup(function (e) {
 	  		if (i === unlocked_dishes) {
 	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
-	  			$("#dish_" + (i-1)).addClass("unlocked")
+	  			$("#dish_" + (i-1)).addClass("unlocked");
 	  			$("#recipe_" + (i-1)).attr('href', thyme_recipes[i-1].url);
 	  		}
 	  	}      
@@ -106,7 +106,7 @@ var make_thyme = function make_thyme() {
 	       var new_thyme = {
 	       	"x": window.innerWidth * 0.07 + 
 			(1.0 * i)/(window.innerWidth * 1.5 /(total_thyme-3)) * (thyme_width),
-			"y": window.innerHeight * 0.5 +                                   
+			"y": window.innerHeight * 0.45 +                                   
 				window.innerHeight * Math.random()/3 - thyme_height * thyme_size_scale,
 			"width" : thyme_width * thyme_size_scale,
 			"height" : thyme_height * thyme_size_scale
