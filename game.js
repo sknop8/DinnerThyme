@@ -51,7 +51,7 @@ $(window).keyup(function (e) {
 	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
 	  		}
 	  	}
-	  	$("#thymer").html("Thyme earned: " + count);
+	  	$("#thymer").html("Thyme spent: " + count);
 	  } 
   }
 });
@@ -105,6 +105,12 @@ var make_thyme = function make_thyme() {
 			"height" : thyme_height * thyme_size_scale
 	       }
 	       thymes.push(new_thyme);
+	       ctx.drawImage(img,
+				thymes[i].x,
+				thymes[i].y,
+				thymes[i].width,
+				thymes[i].height
+			);
 			// ctx.drawImage(img, 
 			// 	window.innerWidth * 0.08 + 
 			// 	(1.0 * i)/(window.innerWidth * 1.2/(total_thyme-3)) * (thyme_width),
@@ -121,19 +127,20 @@ var make_thyme = function make_thyme() {
 
 var draw_thymes = function draw_thymes(){
 	var img = new Image();
-	ctx.clearRect(0, 0, thymes[0].x - thymes[0].width/2, ctx.canvas.height);
-	img.onload = function() {
-		var thyme_width = img.naturalWidth * 0.3;
-		var thyme_height = img.naturalHeight * 0.3;
-		for (var i = 0; i < thymes.length; i++) {
-			ctx.drawImage(img,
-				thymes[i].x,
-				thymes[i].y,
-				thymes[i].width,
-				thymes[i].height
-			);
-		}
-	}
+	ctx.clearRect(0, 0, ctx.canvas.width * (total_thyme * 1.0 - thymes.length) /total_thyme, 
+		ctx.canvas.height);
+	// img.onload = function() {
+	// 	var thyme_width = img.naturalWidth * 0.3;
+	// 	var thyme_height = img.naturalHeight * 0.3;
+	// 	for (var i = 0; i < thymes.length; i++) {
+	// 		ctx.drawImage(img,
+	// 			thymes[i].x,
+	// 			thymes[i].y,
+	// 			thymes[i].width,
+	// 			thymes[i].height
+	// 		);
+	// 	}
+	// }
 	img.src = 'assets/thyme.png';
 }
 
