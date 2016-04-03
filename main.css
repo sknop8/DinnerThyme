@@ -3,8 +3,8 @@
 	padding:0; 
 } 
 
-h1, h2, h3, h4, div{
-	font-family: sans-serif;
+h1, h2, h3, h4, div, footer{
+	font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -29,11 +29,15 @@ html, body {
 #play_button {
 	text-align: center;
 	padding: 1em;
-	background-color: #FFB800;
+	background-color: #FFF;
+	color: #C0834A;
+	text-transform: uppercase;
 }
 
 #play_button:hover {
-	background-color: #FFEE00;
+	/*background-color: #C0834A;*/
+	background-color: rgba(0,0,0,0.5);
+	color: #FFF;
 	cursor: pointer;
 }
 
@@ -84,4 +88,15 @@ html, body {
 	/*background-image: url("assets/wood_seamless.jpg");
     background-repeat: repeat;*/
     display: none;
+}
+
+footer {
+	position: fixed;
+	width: 500px;
+	padding-left: 50%;
+	margin-left: -250px;
+	bottom: 0.5em;
+	text-align: center;
+	color: #FFF;
+	font-size: 1.2em;
 }
