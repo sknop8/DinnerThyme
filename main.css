@@ -11,7 +11,9 @@ h1, h2, h3, h4, div{
 html, body { 
 	width:100%; 
 	height:100%; 
-	background-color: #E0FFE2;
+	/*background-color: #E0FFE2;*/
+	background-image: url("assets/wood_seamless.jpg");
+    background-repeat: repeat;
 	overflow: hidden; 
 } 
 
@@ -20,7 +22,7 @@ html, body {
 	margin-bottom: 0.5em;
 	text-align: center;
 	font-size: 4em;
-	color: #059E32;
+	color: #FFF;
 	text-transform: uppercase;
 }
 
@@ -37,7 +39,8 @@ html, body {
 
 
 #canvas {
-	background-color: #E0FFE2;
+	/*background-color: #E0FFE2;*/
+	background-color: rgba(0,0,0,0);
 	padding: none;
 	margin: none;
 	display: none;
@@ -48,7 +51,7 @@ html, body {
 	font-size: 1.8em;
 	padding: 1em;
 	color: #265229;
-	top: 0;
+	bottom : 0;
 	text-transform: lowercase;
 }
 
@@ -63,9 +66,9 @@ html, body {
 }
 
 .thyme_dish {
-	width: 80px;
+	width: 75px;
 	height: auto;
-	border: solid 15px #fff;
+	border: solid 10px #fff;
 	border-radius: 50%;
 	margin: 0.5em;
 	-webkit-filter: blur(2.5px) grayscale(100%); /* Chrome, Safari, Opera */
@@ -75,10 +78,10 @@ html, body {
 #thyme_dishes {
 	position: fixed;
 	width: 100%;
-	bottom: 0;
+	top : 0;
 	text-align: center;
 	padding-top: 0.5em;
-	background-image: url("assets/wood_seamless.jpg");
-    background-repeat: repeat;
+	/*background-image: url("assets/wood_seamless.jpg");
+    background-repeat: repeat;*/
     display: none;
 }

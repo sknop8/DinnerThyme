@@ -7,6 +7,7 @@ var count = 0;
 
 var total_dishes = 12;
 var total_thyme = total_dishes * 10; 
+var thymes = new Array();
 
 var timer = function timer() {
 	GAME_THYME--; 
@@ -41,6 +42,8 @@ $(window).keyup(function (e) {
 			thymerInterval = setInterval(timer, 1000);
 	  	}
 	  	count++;
+	  	thymes.shift();
+	  	draw_thymes();
 	  	unlocked_dishes = count/10;
 	  	for (var i = 1; i < (total_dishes + 1); i++) {
 	  		if (i === unlocked_dishes) {
@@ -68,7 +71,7 @@ var openGameScreen = function openGameScreen() {
      ctx = c[0].getContext('2d');
 
      ctx.canvas.width = WIDTH;
-     ctx.canvas.height = HEIGHT * 0.7;
+     ctx.canvas.height = HEIGHT * 0.9;
 
 	$("#canvas").css("display", "block");
 	$("#thyme_dishes").css("display", "block");
@@ -85,6 +88,7 @@ var play  = function play() {
 };
 
 var make_thyme = function make_thyme() {
+	thymes = new Array();
 	var img = new Image();
 	img.onload = function(){
 		var thyme_width = img.naturalWidth * 0.3;
@@ -92,16 +96,46 @@ var make_thyme = function make_thyme() {
 
 	    for (var i = 0; i < total_thyme; i++){
 	       var thyme_size_scale = Math.random() + 0.3;
-			ctx.drawImage(img, 
-				Math.floor((Math.random() * window.innerWidth * 0.8) 
-					 + window.innerWidth * 0.05),
-				window.innerHeight * 0.6 - thyme_height * thyme_size_scale,
-				thyme_width * thyme_size_scale,
-				thyme_height * thyme_size_scale);
+	       var new_thyme = {
+	       	"x": window.innerWidth * 0.08 + 
+			(1.0 * i)/(window.innerWidth * 1.2/(total_thyme-3)) * (thyme_width),
+			"y": window.innerHeight * 0.5 +                                   
+				window.innerHeight * Math.random()/3 - thyme_height * thyme_size_scale,
+			"width" : thyme_width * thyme_size_scale,
+			"height" : thyme_height * thyme_size_scale
+	       }
+	       thymes.push(new_thyme);
+			// ctx.drawImage(img, 
+			// 	window.innerWidth * 0.08 + 
+			// 	(1.0 * i)/(window.innerWidth * 1.2/(total_thyme-3)) * (thyme_width),
+			// 	window.innerHeight * 0.5 +                                   
+			// 	window.innerHeight * Math.random()/3 - thyme_height * thyme_size_scale,
+			// 	thyme_width * thyme_size_scale,
+			// 	thyme_height * thyme_size_scale);
 	    }
+	    draw_thymes();
   };
   img.src = 'assets/thyme.png';
+  
 };
+
+var draw_thymes = function draw_thymes(){
+	var img = new Image();
+	ctx.clearRect(0, 0, thymes[0].x - thymes[0].width/2, ctx.canvas.height);
+	img.onload = function() {
+		var thyme_width = img.naturalWidth * 0.3;
+		var thyme_height = img.naturalHeight * 0.3;
+		for (var i = 0; i < thymes.length; i++) {
+			ctx.drawImage(img,
+				thymes[i].x,
+				thymes[i].y,
+				thymes[i].width,
+				thymes[i].height
+			);
+		}
+	}
+	img.src = 'assets/thyme.png';
+}
 
 var put_dishes = function put_dishes() {
 	$("#thyme_dishes").empty();
