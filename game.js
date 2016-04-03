@@ -56,7 +56,7 @@ $(window).keyup(function (e) {
 	  			$("#recipe_" + (i-1)).attr('href', thyme_recipes[i-1].url);
 	  		}
 	  	}      
-	  	$("#thymer").html("Thyme spent: " + count);
+	  	$("#thymer").html("Thyme left: " + (total_thyme - count));
 	  } 
   }
 });
@@ -81,7 +81,7 @@ var openGameScreen = function openGameScreen() {
 	$("#canvas").css("display", "block");
 	$("#thyme_dishes").css("display", "block");
 	$("#thank_you").css("display", "none");
-	$("#thymer").html("Thyme Spent: 0");
+	$("#thymer").html("Thyme Left: " + total_thyme);
 
 	make_thyme();
 	put_dishes();
