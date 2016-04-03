@@ -46,7 +46,7 @@ $(window).keyup(function (e) {
 	  	thymes.shift();
 	  	chop_thymes();
 	  	unlocked_dishes = count/10;
-
+	  	
 	  	//unlock dishes
 	  	for (var i = 1; i < (total_dishes + 1); i++) {
 	  		if (i === unlocked_dishes) {
@@ -57,14 +57,20 @@ $(window).keyup(function (e) {
 	  		}
 	  	}      
 	  	$("#thymer").html("Thyme left: " + (total_thyme - count));
+	  	$("#knife").css("display", "none");
 	  } 
-  }
+  } 
 });
 
 $(window).keydown(function (e) {
 	if (e.keyCode === 32 || e.which === 32) {
 	    e.preventDefault();
-	}
+	    if (playing) {
+	    	unlocked_dishes = count/10;
+	    	$("#knife").css("display", "block");
+	  		$("#knife").css("left", ctx.canvas.width * 0.8 * unlocked_dishes/12);
+	    }
+	} 
 });
 
 var openGameScreen = function openGameScreen() {
@@ -152,6 +158,7 @@ var game_over = function game_over() {
 	GAME_THYME = 11;
 	resetStartScreen();
 	var percent = 100 * count/total_thyme;
+	$("#knife").css("display", "none");
 	$('#title').html("Thyme Saved: " + percent.toFixed(2) + "%");
 	count = 0;
 };
