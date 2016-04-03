@@ -39,6 +39,13 @@ $(window).keyup(function (e) {
 			thymerInterval = setInterval(timer, 1000);
 	  	}
 	  	count++;
+	  	unlocked_dishes = count/10;
+	  	for (var i = 1; i < 11; i++) {
+	  		if (i === unlocked_dishes) {
+	  			$("#dish_" + (i-1)).css("filter", "blur(0px) grayscale(0%)");
+	  			$("#dish_" + (i-1)).css("-webkit-filter", "blur(0px) grayscale(0%)");
+	  		}
+	  	}
 	  	$("#thymer").html("Thyme earned: " + count);
 	  } 
   }
@@ -98,7 +105,8 @@ var put_dishes = function put_dishes() {
 	$("#thyme_dishes").empty();
 	for (var i = 0; i < 10; i++) {
 		$("#thyme_dishes").append("<img src = 'assets/dishes_square/"
-			+ i + ".png' class = 'thyme_dish'>");
+			+ i + ".png' class = 'thyme_dish' id = 'dish_" + i
+			+ "'>");
 	}
 }
 
