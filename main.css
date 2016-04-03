@@ -3,25 +3,30 @@
 	padding:0; 
 } 
 
+h1, h2, h3, h4, div{
+	font-family: sans-serif;
+}
+
 
 html, body { 
 	width:100%; 
 	height:100%; 
+	background-color: #E0FFE2;
+	overflow: hidden; 
 } 
 
 #title {
 	margin-top: 15%;
 	margin-bottom: 0.5em;
 	text-align: center;
-	font-family: sans-serif;
 	font-size: 5em;
 	color: #059E32;
+	text-transform: uppercase;
 }
 
 #play_button {
 	text-align: center;
 	padding: 1em;
-	font-family: sans-serif;
 	background-color: #FFB800;
 }
 
@@ -32,18 +37,29 @@ html, body {
 
 
 #canvas {
-	background-color: #9CFFA1;
+	background-color: #E0FFE2;
 	padding: none;
 	margin: none;
 	display: none;
 }
 
-#thymer {
+#timer, #thymer {
 	position: fixed;
-	top: 0;
-	text-align: left;
-	font-size: 2em;
+	font-size: 1.8em;
 	padding: 1em;
-	font-family: sans-serif;
 	color: #265229;
+	text-transform: lowercase;
+}
+
+#timer {
+	top: 0;
+	text-align: right;
+}
+
+#thymer {
+	width: 500px;
+	padding-left: 50%;
+	margin-left: -250px;
+	bottom: 0em;
+	text-align: center;
 }

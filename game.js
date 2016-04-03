@@ -1,11 +1,14 @@
 
 var c, ctx;
-var GAME_THYME = 11;
+var GAME_THYME = 6 ;
 var thymerInterval;
+var playing = false;
+var count = 0;
+var total_thyme = 100;
 
-var thymer = function thymer() {
+var timer = function timer() {
 	GAME_THYME--; 
-	document.getElementById('thymer').innerHTML = GAME_THYME;
+	document.getElementById('timer').innerHTML = "Time Left: " + GAME_THYME;
 	if (GAME_THYME === 0) {
 		game_over();
 	}
@@ -22,8 +25,26 @@ var resetStartScreen = function openStartScreen() {
 	$("#play_button").css("display", "block");
 	$("#canvas").css("display", "none");
 	$('#play_button').html('Cook Again!');
+	$('#timer').html('');
 	$('#thymer').html('');
 };
+
+$(window).keyup(function (e) {
+  if (e.keyCode === 32 || e.which === 32) {
+    e.preventDefault()
+    var keyCode = e.keyCode;
+	  if(keyCode === 32 && playing) {
+	  	count++;
+	  	$("#thymer").html("Thyme earned: " + count);
+	  } 
+  }
+});
+
+$(window).keydown(function (e) {
+	if (e.keyCode === 32 || e.which === 32) {
+	    e.preventDefault();
+	}
+});
 
 var openGameScreen = function openGameScreen() {
 
@@ -37,15 +58,17 @@ var openGameScreen = function openGameScreen() {
      ctx.canvas.height = HEIGHT;
 
 	$("#canvas").css("display", "block");
+	$("#thymer").html("Thyme Spent: 0");
 
 	make_thyme();
-}
+};
 
 var play  = function play() {
 	closeStartScreen();
 	openGameScreen();
-	thymer();
-	thymerInterval = setInterval(thymer, 1000);
+	timer();
+	thymerInterval = setInterval(timer, 1000);
+	playing = true;
 };
 
 var make_thyme = function make_thyme() {
@@ -54,13 +77,13 @@ var make_thyme = function make_thyme() {
 		var thyme_width = img.naturalWidth * 0.3;
 		var thyme_height = img.naturalHeight * 0.3;
 
-	    for (var i=0;i<500;i++){
+	    for (var i = 0; i < total_thyme; i++){
 	       var thyme_size_scale = Math.random();
 			ctx.drawImage(img, 
 				Math.floor((Math.random() * window.innerWidth * 0.8) 
-					+ window.innerWidth * 0.05),
-				Math.floor((Math.random() * window.innerHeight * 0.8) 
-					+ window.innerHeight * 0.05),
+					 + window.innerWidth * 0.05),
+				Math.floor((Math.random() * window.innerHeight * 0.2 ) 
+					+ window.innerHeight * 0.3),
 				thyme_width * thyme_size_scale,
 				thyme_height * thyme_size_scale);
 	    }
@@ -77,9 +100,11 @@ var collect_thyme = function collect_thyme() {
 };
 
 var game_over = function game_over() {
+	playing = false;
 	clearTimeout(thymerInterval);
-	GAME_THYME = 11;
+	GAME_THYME = 6;
 	resetStartScreen();
-	$('#title').html("Thyme Wasted: ");
+	$('#title').html("Thyme Wasted: " + (total_thyme - count));
+	count = 0;
 };
 
